@@ -1,9 +1,9 @@
 import baseClient from '@doubledutch/base-client'
 
 import bindings from './bindings'
-import shim from './shim'
+import emulatorShim from './emulatorShim'
 
-const DD = bindings || shim
+const DD = bindings || emulatorShim
 
 const client = baseClient(DD)
 

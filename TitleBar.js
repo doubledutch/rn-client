@@ -5,17 +5,22 @@ const topSpaceHeight = 21
 const barHeight = 44
 
 const mounted = []
+let _emulatorTitle = ''
 export function setEmulatorTitle(emulatorTitle) {
+  _emulatorTitle = emulatorTitle
   setTimeout(() => {
     mounted.forEach(tb => tb.setState({emulatorTitle}))    
   }, 1)
 }
 
+let isEmulated
+export function setEmulated() { isEmulated = true }
+
 export class TitleBar extends Component {
   constructor() {
     super()
 
-    this.state = { isSignedIn: false, didSigninFail: false, showStatus: false, title: '' }
+    this.state = { isSignedIn: false, didSigninFail: false, showStatus: false, title: _emulatorTitle, emulatorTitle: _emulatorTitle }
   }
 
   componentWillMount() {
@@ -48,14 +53,13 @@ export class TitleBar extends Component {
 
   render() {
     const { title } = this.state
-    const { client } = this.props
-    if (client && this._setTitle) this._setTitle(`${title}${this.statusLightText()}`)
+    if (this._setTitle) this._setTitle(`${title}${this.statusLightText()}`)
 
     return (
-      <View style={s.wholeBar}>
+      <View style={isEmulated ? s.wholeBarEmulator : s.wholeBar}>
         <View style={s.topSpace} />
         <View style={s.spacer}>
-          { this.state.emulatorTitle && <Text style={s.emulatorTitle}>{this.state.emulatorTitle}</Text> }
+          { isEmulated && <Text style={s.emulatorTitle}>{this.state.emulatorTitle}</Text> }
         </View>
       </View>
     )
@@ -74,8 +78,10 @@ export class TitleBar extends Component {
 }
 
 const s = ReactNative.StyleSheet.create({
-  wholeBar: {
+  wholeBarEmulator: {
     backgroundColor: '#009acd'
+  },
+  wholeBar: {
   },
   topSpace: {
     height: topSpaceHeight
@@ -88,7 +94,7 @@ const s = ReactNative.StyleSheet.create({
   emulatorTitle: {
     textAlign: 'center',
     color: 'white',
-    fontSize: 16
+    fontSize: 17
   },
   pendingLight: {
     backgroundColor: 'yellow',

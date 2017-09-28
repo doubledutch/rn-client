@@ -1,8 +1,6 @@
-import { setEmulatorTitle } from './TitleBar'
-
 export default {
   openURL(url) { console.log('openURL: ' + url) },
-  setTitle: setEmulatorTitle,
+  setTitle() {},
   currentEvent: {
     StartDate: '2017-01-01T00:00:00.000Z',
     EndDate: '2017-01-02T00:00:00.000Z',

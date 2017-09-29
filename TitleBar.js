@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ReactNative, { Text, View } from 'react-native'
+import ReactNative, { Platform, Text, View } from 'react-native'
 
 const topSpaceHeight = 21
 const barHeight = 44
@@ -87,10 +87,10 @@ const s = ReactNative.StyleSheet.create({
   wholeBar: {
   },
   topSpace: {
-    height: topSpaceHeight
+    height: Platform.select({ios: topSpaceHeight, android: 0})
   },
   spacer: {
-    height: barHeight,
+    height: Platform.select({ios: barHeight, android: 0}),
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -98,23 +98,5 @@ const s = ReactNative.StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     fontSize: 17
-  },
-  pendingLight: {
-    backgroundColor: 'yellow',
-    height: barHeight - 10,
-    width: barHeight - 10,
-    borderRadius: (barHeight - 10) / 2
-  },
-  failedLight: {
-    backgroundColor: 'red',
-    height: barHeight - 10,
-    width: barHeight - 10,
-    borderRadius: (barHeight - 10) / 2
-  },
-  successLight: {
-    backgroundColor: 'green',
-    height: barHeight - 10,
-    width: barHeight - 10,
-    borderRadius: (barHeight - 10) / 2
   }
 })

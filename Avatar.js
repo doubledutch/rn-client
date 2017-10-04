@@ -3,7 +3,7 @@ import ReactNative, {
   Text, View, Image
 } from 'react-native'
 
-export default class Avatar extends Component {
+export class Avatar extends Component {
   constructor() {
     super()
   }

@@ -10,7 +10,7 @@ The easiest way to get started is to install the [DoubleDutch command line tool]
 See also [@doubledutch/firebase-connector](https://github.com/doubledutch/firebase-connector)
 for an easy backend for your DoubleDutch feature.
 
-![Screenshot of sample DoubleDutch feature using rn-client](samples/rn-sample.png)
+![Screenshot of sample DoubleDutch feature using rn-client](https://github.com/doubledutch/rn-client/raw/master/samples/rn-sample.png)
 
 # Usage
 

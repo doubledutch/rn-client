@@ -10,10 +10,12 @@ The easiest way to get started is to install the [DoubleDutch command line tool]
 See also [@doubledutch/firebase-connector](https://github.com/doubledutch/firebase-connector)
 for an easy backend for your DoubleDutch feature.
 
+![Screenshot of sample DoubleDutch feature using rn-client](samples/rn-sample.png)
+
 # Usage
 
 ```jsx
-import client, { TitleBar } from '@doubledutch/rn-client'
+import client, { TitleBar, Avatar } from '@doubledutch/rn-client'
 
 console.log(client.currentUser)
 console.log(client.currentEvent)
@@ -24,7 +26,8 @@ client.getToken().then(token => console.log(`${token} is a valid DoubleDutch acc
 class HomeView extends ReactNative.Component {
   render() {
     <View>
-      <TitleBar client={client} title={`Hello ${client.currentUser.FirstName}`}>
+      <TitleBar client={client} title={`Hello ${client.currentUser.FirstName}`} />
+      <Avatar user={client.currentUser} size={40} />
     </View>
   }
 }
@@ -68,7 +71,7 @@ Provides information about the current event.
 Primary color used in the event app, to match event branding.
 
 ```javascript
-'#008080'
+'#009acd'
 ```
 
 ## `client.getToken`
@@ -85,6 +88,11 @@ client.getToken().then(token => /* Use the token. */)
 React Native component useful for interacting with the title bar that is native
 to DoubleDutch apps.
 
+In the simulator, a title bar will be rendered as React Native components. In a
+native DoubleDutch iOS or Android app, the native app provides the title bar.
+`<TitleBar />` abstracts away these differences to provide a simulated
+experience that matches a real DoubleDutch app.
+
 ```jsx
 <TitleBar client={client} title="Feature title" signin={this.signin} />
 ```
@@ -100,3 +108,19 @@ to DoubleDutch apps.
   authenticating to your backend.  E.g. if using
   [@doubledutch/firebase-connector](https://github.com/doubledutch/firebase-connector),
   this can be the Promise returned by `fbc.signin()`.
+
+## Avatar
+
+React Native component that shows a circular avatar image of an attendee, or
+his/her initials if no image is available.
+
+```jsx
+<Avatar user={user} size={25} />
+```
+
+### Props
+
+- `user`. The attendee whose avatar should be displayed. This can be
+  `client.currentUser` to display the avatar of the attendee currently viewing
+  the app, or another attendee object.
+- `size`. The diameter of the avatar image.

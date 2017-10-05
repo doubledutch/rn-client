@@ -1,16 +1,16 @@
 @doubledutch/rn-client
 ======================
 
-DoubleDutch client library for building custom features with React Native
+DoubleDutch client library for building custom extensions with React Native
 
 # Automated setup
 
 The easiest way to get started is to install the [DoubleDutch command line tool](https://github.com/doubledutch/cli) and run `doubledutch init`.
 
 See also [@doubledutch/firebase-connector](https://github.com/doubledutch/firebase-connector)
-for an easy backend for your DoubleDutch feature.
+for an easy backend for your DoubleDutch extension.
 
-![Screenshot of sample DoubleDutch feature using rn-client](https://github.com/doubledutch/rn-client/raw/master/samples/rn-sample.png)
+![Screenshot of sample DoubleDutch extension using rn-client](https://github.com/doubledutch/rn-client/raw/master/samples/rn-sample.png)
 
 # Usage
 
@@ -94,7 +94,7 @@ native DoubleDutch iOS or Android app, the native app provides the title bar.
 experience that matches a real DoubleDutch app.
 
 ```jsx
-<TitleBar client={client} title="Feature title" signin={this.signin} />
+<TitleBar client={client} title="Extension title" signin={this.signin} />
 ```
 
 ### Props

@@ -36,7 +36,8 @@ export class TitleBar extends Component {
 
     this.setTitle(title)
 
-    signin
+    if (signin) {
+      signin
       .then(() => {
         this.setState({ isSignedIn: true })
         this.setTitle(this.props.title)
@@ -49,6 +50,7 @@ export class TitleBar extends Component {
         this.setState({ didSigninFail: true })
         this.setTitle(this.props.title)
       })
+    }
   }
 
   componentWillUnmount() {

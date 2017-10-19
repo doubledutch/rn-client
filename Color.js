@@ -1,15 +1,35 @@
 // Thanks to https://github.com/kasperjj for the HSV/RGB transformations
 
-export function shiftHue(rgb, hueShift) {
-  const {r,g,b} = parseRGB(rgb)
-  const hsv = RGBtoHSV(r,g,b)
-  hsv.h += hueShift
-  return HSVtoRGBstring(hsv)
+const rgbBlack = {r:0, g:0, b:0}
+const defaultColor = {r:0, g:154, b:205}
+
+export default class Color {
+  constructor(input) {
+    if (!input) {
+      this.hsv = RGBtoHSV(defaultColor)
+    } else if (typeof input === 'string') {
+      this.hsv = RGBtoHSV(parseRGB(input))
+    } else if (input.h && input.s && input.v) {
+      const {h,s,v} = input
+      this.hsv = {h,s,v}
+    } else if (input.r && input.g && input.b) {
+      this.hsv = RGBtoHSV(input)
+    } else {
+      this.hsv = RGBtoHSV(defaultColor)
+    }
+  }
+
+  rgb() { return HSVtoRGB(this.hsv) }
+  rgbString() { return HSVtoRGBstring(this.hsv) }
+  hsv() {
+    const {h,s,v} = this.hsv
+    return {h,s,v}
+  }
+
+  shiftHue(hueShift) { return new Color({ ...this.hsv, h: this.hsv.h + hueShift }) }
+  limitLightness(maxLightness) { return new Color({ ...this.hsv, v: Math.min(this.hsv.v, maxLightness) }) }
 }
 
-export const defaultPrimaryColor = '#009acd'
-
-const rgbBlack = {r: 0, g: 0, b: 0}
 function parseRGB(rgb) {
   if (!rgb) return rgbBlack
 
@@ -34,11 +54,8 @@ function parseRGB(rgb) {
   return rgbBlack
 }
 
-function HSVtoRGB(h, s, v) {
+function HSVtoRGB({h, s, v}) {
   var r, g, b, i, f, p, q, t
-  if (arguments.length === 1) {
-    s = h.s, v = h.v, h = h.h
-  }
   i = Math.floor(h * 6)
   f = h * 6 - i
   p = v * (1 - s)
@@ -59,10 +76,7 @@ function HSVtoRGB(h, s, v) {
   }
 }
 
-function RGBtoHSV(r, g, b) {
-  if (arguments.length === 1) {
-    g = r.g, b = r.b, r = r.r
-  }
+function RGBtoHSV({r, g, b}) {
   var max = Math.max(r, g, b), min = Math.min(r, g, b),
       d = max - min,
       h,
@@ -76,16 +90,12 @@ function RGBtoHSV(r, g, b) {
     case b: h = (r - g) + d * 4; h /= 6 * d; break;
   }
 
-  return {
-    h: h,
-    s: s,
-    v: v
-  }
+  return { h,s,v }
 }
 
 function HSVtoRGBstring(col){
   if(col.h<0)col.h=1-col.h
   if(col.h>=1)col.h=col.h-1
   var rgb=HSVtoRGB(col)
-  return "rgb("+rgb.r+","+rgb.g+","+rgb.b+")"
+  return `rgb(${rgb.r},${rgb.g},${rgb.b})`
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ReactNative, { Platform, Text, View } from 'react-native'
-import { defaultPrimaryColor } from './colors'
+import Color from './Color'
 
 const topSpaceHeight = 21
 const barHeight = 44
@@ -85,7 +85,7 @@ export class TitleBar extends Component {
 
 const s = ReactNative.StyleSheet.create({
   wholeBarEmulator: {
-    backgroundColor: defaultPrimaryColor
+    backgroundColor: new Color().rgbString()
   },
   wholeBar: {
   },

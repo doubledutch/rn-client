@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReactNative, { Platform, Text, View } from 'react-native'
+import { defaultPrimaryColor } from './colors'
 
 const topSpaceHeight = 21
 const barHeight = 44
@@ -70,7 +71,7 @@ export class TitleBar extends Component {
     )
   }
 
-  statusLightText = () => {
+  statusLightText () {
     const { showStatus, isSignedIn, didSigninFail } = this.state
     if (showStatus) {
       if (isSignedIn) return '  🔵'
@@ -84,7 +85,7 @@ export class TitleBar extends Component {
 
 const s = ReactNative.StyleSheet.create({
   wholeBarEmulator: {
-    backgroundColor: '#009acd'
+    backgroundColor: defaultPrimaryColor
   },
   wholeBar: {
   },

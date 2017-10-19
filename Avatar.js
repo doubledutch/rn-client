@@ -7,6 +7,7 @@ export class Avatar extends Component {
   constructor() {
     super()
     this.state = {}
+    this.s = null
   }
 
   getUser() {
@@ -17,7 +18,6 @@ export class Avatar extends Component {
     }
   }
 
-  s = null
   componentWillMount() {
     this.s = createStyles(this.props)
     this.getUser()

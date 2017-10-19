@@ -1,4 +1,4 @@
-// Thanks to https://github.com/kasperjj
+// Thanks to https://github.com/kasperjj for the HSV/RGB transformations
 
 export function shiftHue(rgb, hueShift) {
   const {r,g,b} = parseRGB(rgb)

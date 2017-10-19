@@ -1,31 +1,47 @@
 import React, { Component } from 'react'
-import ReactNative, {
-  Text, View, Image
+import {
+  Image, StyleSheet, Text, View
 } from 'react-native'
 
 export class Avatar extends Component {
   constructor() {
     super()
+    this.state = {}
+  }
+
+  getUser() {
+    if ((!this.props.user || !this.props.user.image) && this.props.client) {
+      this.props.client.api.getUser(this.props.userId)
+      .then(user => this.setState({user}))
+      .catch(err => console.error(err))
+    }
   }
 
   s = null
   componentWillMount() {
     this.s = createStyles(this.props)
+    this.getUser()
   }
   componentWillReceiveProps(newProps) {
     this.s = createStyles(newProps)
+    if (this.props.userId !== newProps.userId || this.props.client !== newProps.client) {
+      this.getUser()
+    }
   }
 
   render() {
-    const { user, style } = this.props
+    const { style } = this.props
+    const user = this.state.user || this.props.user
     const s = this.s
+
+    if (!user) return null
 
     return (
       <View style={style || s.defaultOuterStyle}>
-      { user.ImageUrl
-        ? <Image source={{uri: user.ImageUrl}} style={this.s.image}></Image>
+      { user.image
+        ? <Image source={{uri: user.image}} style={this.s.image}></Image>
         : (<View style={s.noface}>
-            <Text style={this.s.nofaceText}>{user.FirstName ? user.FirstName.substring(0,1) : ''}{user.LastName ? user.LastName.substring(0,1) : ''}</Text>
+            <Text style={this.s.nofaceText}>{user.firstName ? user.firstName.substring(0,1) : ''}{user.lastName ? user.lastName.substring(0,1) : ''}</Text>
           </View>)
         }
       </View>
@@ -36,7 +52,7 @@ export class Avatar extends Component {
 function createStyles({size}) {
   const diameter = size || 25
 
-  return ReactNative.StyleSheet.create({
+  return StyleSheet.create({
     defaultOuterStyle: {
     },
     noface: {

@@ -1,4 +1,5 @@
 export default {
+  isEmulated: true,
   openURL(url) { console.log('openURL: ' + url) },
   setTitle() {},
   currentEvent: {
@@ -12,7 +13,9 @@ export default {
   currentUser: {
     UserId: '24601',
     ImageUrl: 'https://images.amcnetworks.com/bbcamerica.com/wp-content/blogs.dir/55/files/2012/12/Hugh-Jackman-Les-Miserables.jpg',
-    UserIdentifierId: 'jean@valjean.com',
+    UserName: 'jean@valjean.com',
+    EmailAddress: 'jean@valjean.com',
+    UserIdentifierId: 'jvj24601',
     FirstName: 'Jean',
     LastName: 'Valjean',
     Title: 'Character',
@@ -25,7 +28,7 @@ export default {
     UpdateObjects: [],
     Grid: []
   },
-  primaryColor: '#008080',
+  primaryColor: '#009acd',
   apiRootURL: 'https://api.doubledutch.me/v2',
   requestAccessToken(callback) {
     callback(null, 'fake-access-token')

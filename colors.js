@@ -1,8 +1,10 @@
+// Thanks to https://github.com/kasperjj
+
 export function shiftHue(rgb, hueShift) {
   const {r,g,b} = parseRGB(rgb)
   const hsv = RGBtoHSV(r,g,b)
   hsv.h += hueShift
-  return cStr(hsv)
+  return HSVtoRGBstring(hsv)
 }
 
 export const defaultPrimaryColor = '#009acd'
@@ -11,14 +13,23 @@ const rgbBlack = {r: 0, g: 0, b: 0}
 function parseRGB(rgb) {
   if (!rgb) return rgbBlack
 
-  const [longMatch, rHex, gHex, bHex] = rgb.match(/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i)
-  if (longMatch) return { r: parseInt(rHex, 16), g: parseInt(gHex, 16), b: parseInt(bHex, 16) }
+  const longMatch = rgb.match(/^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/i)
+  if (longMatch) {
+    const [_, rHex, gHex, bHex] = longMatch
+    return { r: parseInt(rHex, 16), g: parseInt(gHex, 16), b: parseInt(bHex, 16) }
+  } 
 
-  const [shortMatch, rsHex, gsHex, bsHex] = rgb.match(/^#?([0-9a-f])([0-9a-f])([0-9a-f])$/i)
-  if (shortMatch) return { r: parseInt(rsHex+rsHex, 16), g: parseInt(gsHex+gsHex, 16), b: parseInt(bsHex+bsHex, 16) }
+  const shortMatch = rgb.match(/^#?([0-9a-f])([0-9a-f])([0-9a-f])$/i)
+  if (shortMatch) {
+    const [_, rHex, gHex, bHex] = shortMatch
+    return { r: parseInt(rHex+rHex, 16), g: parseInt(gHex+gHex, 16), b: parseInt(bHex+bHex, 16) }
+  }
 
-  const [rgbMatch, r, g, b] = rgb.match(/^\s*rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)\s*$/)
-  if (rgbMatch) return { r: +r, g: +g, b: +b }
+  const rgbMatch = rgb.match(/^\s*rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)\s*$/)
+  if (rgbMatch) {
+    const [_, r, g, b] = rgbMatch
+    return { r: +r, g: +g, b: +b }
+  }
 
   return rgbBlack
 }
@@ -72,7 +83,7 @@ function RGBtoHSV(r, g, b) {
   }
 }
 
-function cStr(col){
+function HSVtoRGBstring(col){
   if(col.h<0)col.h=1-col.h
   if(col.h>=1)col.h=col.h-1
   var rgb=HSVtoRGB(col)

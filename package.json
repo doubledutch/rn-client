@@ -1,6 +1,6 @@
 {
   "name": "@doubledutch/rn-client",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "@doubledutch/base-client": "^2.0.0",
+    "@doubledutch/base-client": "^2.0.4",
     "react": "~16.0.0-alpha.12",
     "react-native": "0.46.4"
   },

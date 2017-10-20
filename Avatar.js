@@ -10,22 +10,25 @@ export class Avatar extends Component {
     this.s = null
   }
 
-  getUser() {
-    if (this.props.user && this.props.user.id && !this.props.user.image && this.props.client) {
-      this.props.client.api.getUser(this.props.user.id)
-      .then(user => this.setState({user}))
-      .catch(err => console.error(err))
+  getUser(props) {
+    if (props.user && props.user.id && !props.user.image && props.client) {
+      props.client.api.getUser(props.user.id)
+        .then(user => this.setState({user}))
+        .catch(err => console.error(err)))
     }
   }
 
   componentWillMount() {
-    this.s = createStyles(this.props)
-    this.getUser()
+    this.s = createStyles(this.props)    
+  }
+
+  componentDidMount() {
+    this.getUser(this.props)
   }
   componentWillReceiveProps(newProps) {
     this.s = createStyles(newProps)
     if (this.props.user !== newProps.user || this.props.client !== newProps.client) {
-      this.getUser()
+      this.getUser(newProps)
     }
   }
 

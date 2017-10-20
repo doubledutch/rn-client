@@ -52,6 +52,6 @@ export function setOptions({ accessToken, apiRootURL, eventId, currentUser, prim
 }
 
 function setAdditionalColors(client) {
-  client.secondaryColor = new _Color(client.primaryColor).shiftHue(-1/3).limitLightness(0.85).rgbString()
-  client.tertiaryColor = new _Color(client.primaryColor).shiftHue(1/3).limitLightness(0.85).rgbString()  
+  client.secondaryColor = new _Color(client.primaryColor).shiftHue(-1/3).limitLightness(0.8).rgbString()
+  client.tertiaryColor = new _Color(client.primaryColor).shiftHue(1/3).limitLightness(0.8).rgbString()  
 }

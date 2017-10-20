@@ -11,8 +11,8 @@ export class Avatar extends Component {
   }
 
   getUser() {
-    if ((!this.props.user || !this.props.user.image) && this.props.client) {
-      this.props.client.api.getUser(this.props.userId)
+    if (this.props.user && this.props.user.id && !this.props.user.image && this.props.client) {
+      this.props.client.api.getUser(this.props.user.id)
       .then(user => this.setState({user}))
       .catch(err => console.error(err))
     }
@@ -24,7 +24,7 @@ export class Avatar extends Component {
   }
   componentWillReceiveProps(newProps) {
     this.s = createStyles(newProps)
-    if (this.props.userId !== newProps.userId || this.props.client !== newProps.client) {
+    if (this.props.user !== newProps.user || this.props.client !== newProps.client) {
       this.getUser()
     }
   }
@@ -38,12 +38,10 @@ export class Avatar extends Component {
 
     return (
       <View style={style || s.defaultOuterStyle}>
-      { user.image
-        ? <Image source={{uri: user.image}} style={this.s.image}></Image>
-        : (<View style={s.noface}>
-            <Text style={this.s.nofaceText}>{user.firstName ? user.firstName.substring(0,1) : ''}{user.lastName ? user.lastName.substring(0,1) : ''}</Text>
-          </View>)
-        }
+        <View style={s.noface}>
+          <Text style={this.s.nofaceText}>{user.firstName ? user.firstName.substring(0,1) : ''}{user.lastName ? user.lastName.substring(0,1) : ''}</Text>
+          { user.image ? <Image source={{uri: user.image}} style={this.s.image}></Image> : null }
+        </View>
       </View>
     )
   }
@@ -70,6 +68,7 @@ function createStyles({size}) {
       fontSize: diameter * 0.55
     },
     image: {
+      position: 'absolute',
       width: diameter,
       height: diameter,
       borderRadius: diameter / 2

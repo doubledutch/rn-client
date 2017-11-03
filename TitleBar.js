@@ -85,7 +85,12 @@ export class TitleBar extends Component {
 
 const s = ReactNative.StyleSheet.create({
   wholeBarEmulator: {
-    backgroundColor: new Color().rgbString()
+    backgroundColor: new Color().rgbString(),
+    position: 'absolute',
+    opacity: 0.9,
+    top: 0,
+    width: '100%',
+    zIndex: 1000000
   },
   wholeBar: {
   },

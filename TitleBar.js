@@ -62,7 +62,7 @@ export class TitleBar extends Component {
     const { title } = this.state
 
     return (
-      <View style={isEmulated ? s.wholeBarEmulator : s.wholeBar}>
+      <View style={isEmulated ? [s.wholeBarEmulator, this.props.style] : s.wholeBar}>
         <View style={s.topSpace} />
         <View style={s.spacer}>
           { isEmulated && <Text style={s.emulatorTitle}>{this.state.title}</Text> }
@@ -86,7 +86,6 @@ export class TitleBar extends Component {
 const s = ReactNative.StyleSheet.create({
   wholeBarEmulator: {
     backgroundColor: new Color().rgbString(),
-    position: 'absolute',
     opacity: 0.9,
     top: 0,
     width: '100%',

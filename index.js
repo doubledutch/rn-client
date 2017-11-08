@@ -1,6 +1,7 @@
 import baseClient from '@doubledutch/base-client'
 export { TitleBar } from './TitleBar'
 export { Avatar } from './Avatar'
+export { JavascriptSdkWebView } from './JavascriptSdkWebView'
 import _Color from './Color'
 export const Color = _Color
 

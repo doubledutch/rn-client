@@ -41,13 +41,13 @@ Provides information about the current attendee.
 
 ```javascript
 {
-  UserId: '24601',                        // DoubleDutch user ID (required)
-  ImageUrl: 'https://ddut.ch/image.jpg',  // Avatar image URL (optional)
-  UserIdentifierId: 'jean@valjean.com',   // Unique ID provided by event organizer (required)
-  FirstName: 'Jean',                      // Given name (required)
-  LastName: 'Valjean',                    // Surname (required)
-  Title: 'Character',                     // Job title (optional)
-  Company: 'Les Misérables'               // Company attendee works for (optional)
+  id: '24601',                            // DoubleDutch user ID (required)
+  image: 'https://ddut.ch/image.jpg',     // Avatar image URL (optional)
+  identifier: 'jean@valjean.com',         // Unique ID provided by event organizer (required)
+  firstName: 'Jean',                      // Given name (required)
+  lastName: 'Valjean',                    // Surname (required)
+  title: 'Character',                     // Job title (optional)
+  company: 'Les Misérables'               // Company attendee works for (optional)
 }
 ```
 
@@ -57,12 +57,12 @@ Provides information about the current event.
 
 ```javascript
 {
-  StartDate: '2017-01-01T00:00:00.000Z',  // First day of event
-  EndDate: '2017-01-02T00:00:00.000Z',    // Last day of event
-  EventId: 'sample-event-id',             // Event ID provided by DoubleDutch (required)
-  Description: 'Happy New Year',          // Description of the event (optional)
-  Name: 'New Year Kickoff',               // Name of the event (required)
-  BundleId: 'sample-bundle-id'            // ID of the parent app that contains this event
+  startDate: '2017-01-01T00:00:00.000Z',  // First day of event
+  endDate: '2017-01-02T00:00:00.000Z',    // Last day of event
+  id: 'sample-event-id',             // Event ID provided by DoubleDutch (required)
+  description: 'Happy New Year',          // Description of the event (optional)
+  name: 'New Year Kickoff',               // Name of the event (required)
+  appId: 'sample-app-id'                  // ID of the parent app that contains this event
 }
 ```
 
@@ -74,6 +74,18 @@ Primary color used in the event app, to match event branding.
 '#009acd'
 ```
 
+`client.secondaryColor` and `client.tertiaryColor` are also automatically
+generated based on this `primaryColor`, designed to be pleasing complements when
+other branded colors are desired.
+
+### `Color`
+If additional branded colors are desired, a `Color` class is exported with some
+useful tranformations available, e.g.
+
+```javascript
+new Color(client.primaryColor).shiftHue(1/2).limitLightness(0.8).rgbString()
+```
+
 ## `client.getToken`
 
 Returns a Promise which resolves to a valid access token.  Normally used
@@ -83,7 +95,7 @@ indirectly by other client libraries to access the DoubleDutch platform.
 client.getToken().then(token => /* Use the token. */)
 ```
 
-## TitleBar
+## `TitleBar`
 
 React Native component useful for interacting with the title bar that is native
 to DoubleDutch apps.
@@ -109,7 +121,7 @@ experience that matches a real DoubleDutch app.
   [@doubledutch/firebase-connector](https://github.com/doubledutch/firebase-connector),
   this can be the Promise returned by `fbc.signin()`.
 
-## Avatar
+## `Avatar`
 
 React Native component that shows a circular avatar image of an attendee, or
 his/her initials if no image is available.

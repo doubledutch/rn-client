@@ -12,7 +12,7 @@ export class Avatar extends Component {
 
   getUser(props) {
     if (props.user && props.user.id && !props.user.image && props.client) {
-      props.client.api.getUser(props.user.id)
+      props.client.getUser(props.user.id)
         .then(user => this.setState({user}))
         .catch(err => console.error(err))
     }

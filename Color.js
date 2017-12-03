@@ -6,28 +6,28 @@ const defaultColor = {r:0, g:154, b:205}
 export default class Color {
   constructor(input) {
     if (!input) {
-      this.hsv = RGBtoHSV(defaultColor)
+      this._hsv = RGBtoHSV(defaultColor)
     } else if (typeof input === 'string') {
-      this.hsv = RGBtoHSV(parseRGB(input))
+      this._hsv = RGBtoHSV(parseRGB(input))
     } else if (input.h && input.s && input.v) {
       const {h,s,v} = input
-      this.hsv = {h,s,v}
+      this._hsv = {h,s,v}
     } else if (input.r && input.g && input.b) {
-      this.hsv = RGBtoHSV(input)
+      this._hsv = RGBtoHSV(input)
     } else {
-      this.hsv = RGBtoHSV(defaultColor)
+      this._hsv = RGBtoHSV(defaultColor)
     }
   }
 
-  rgb() { return HSVtoRGB(this.hsv) }
-  rgbString() { return HSVtoRGBstring(this.hsv) }
+  rgb() { return HSVtoRGB(this._hsv) }
+  rgbString() { return HSVtoRGBstring(this._hsv) }
   hsv() {
-    const {h,s,v} = this.hsv
+    const {h,s,v} = this._hsv
     return {h,s,v}
   }
 
-  shiftHue(hueShift) { return new Color({ ...this.hsv, h: this.hsv.h + hueShift }) }
-  limitLightness(maxLightness) { return new Color({ ...this.hsv, v: Math.min(this.hsv.v, maxLightness) }) }
+  shiftHue(hueShift) { return new Color({ ...this._hsv, h: this._hsv.h + hueShift }) }
+  limitLightness(maxLightness) { return new Color({ ...this._hsv, v: Math.min(this._hsv.v, maxLightness) }) }
 }
 
 function parseRGB(rgb) {

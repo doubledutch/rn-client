@@ -127,7 +127,7 @@ React Native component that shows a circular avatar image of an attendee, or
 his/her initials if no image is available.
 
 ```jsx
-<Avatar user={user} size={25} />
+<Avatar user={user} size={25} client={client} />
 ```
 
 ### Props

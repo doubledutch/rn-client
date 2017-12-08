@@ -3,7 +3,7 @@ import ReactNative, { Platform, Text, View } from 'react-native'
 import Color from './Color'
 
 const topSpaceHeight = 21
-const barHeight = 44
+const barHeight = 43
 
 let isEmulated
 export function setEmulated() { isEmulated = true }

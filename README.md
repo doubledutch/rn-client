@@ -23,7 +23,7 @@ console.log(client.primaryColor)
 
 client.getToken().then(token => console.log(`${token} is a valid DoubleDutch access token, usually used indirectly by other client libraries.`))
 
-class HomeView extends ReactNative.Component {
+class HomeView extends React.Component {
   render() {
     <View>
       <TitleBar client={client} title={`Hello ${client.currentUser.FirstName}`} />

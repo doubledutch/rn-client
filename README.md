@@ -27,7 +27,7 @@ class HomeView extends React.Component {
   render() {
     return (
       <View>
-        <TitleBar client={client} title={`Hello ${client.currentUser.FirstName}`} />
+        <TitleBar client={client} title={`Hello ${client.currentUser.firstName}`} />
         <Avatar user={client.currentUser} size={40} />
       </View>
     )

@@ -25,10 +25,12 @@ client.getToken().then(token => console.log(`${token} is a valid DoubleDutch acc
 
 class HomeView extends React.Component {
   render() {
-    <View>
-      <TitleBar client={client} title={`Hello ${client.currentUser.FirstName}`} />
-      <Avatar user={client.currentUser} size={40} />
-    </View>
+    return (
+      <View>
+        <TitleBar client={client} title={`Hello ${client.currentUser.FirstName}`} />
+        <Avatar user={client.currentUser} size={40} />
+      </View>
+    )
   }
 }
 ```

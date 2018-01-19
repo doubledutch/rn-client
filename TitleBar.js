@@ -22,7 +22,7 @@ export class TitleBar extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.title !== this.props.title) setTitle(newProps.title)
+    if (newProps.title !== this.props.title) this.setTitle(newProps.title)
   }
 
   componentWillMount() {

@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@doubledutch/base-client@^2.0.0":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@doubledutch/base-client/-/base-client-2.0.3.tgz#f4cd68690adeb2b2f9bd0fac0471226075a47891"
+"@doubledutch/base-client@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@doubledutch/base-client/-/base-client-3.0.3.tgz#d9ebd692c65ec5b4d72df24b71e0081e953a6de4"
 
 abab@^1.0.3:
   version "1.0.4"
@@ -3634,7 +3634,7 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@^16.0.0:
+react@~16.0.0-alpha.12:
   version "16.0.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
   dependencies:

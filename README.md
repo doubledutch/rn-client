@@ -68,6 +68,54 @@ Provides information about the current event.
 }
 ```
 
+## `client.getUser(id)`
+
+Returns a Promise which resolves to the attendee in the current event.
+
+```javascript
+client.getUser(42).then(attendee => console.log(attendee))
+```
+
+## `client.getUsers()`
+
+Returns a Promise which resolves to the attendees in the current event.
+
+```javascript
+client.getUsers().then(attendees => console.log(attendees))
+```
+
+## `client.getCustomItems()`
+
+Returns a Promise which resolves to the custom items in the current event.
+
+```javascript
+client.getCustomItems().then(items => console.log(items))
+```
+
+## `client.getExhibitors()`
+
+Returns a Promise which resolves to the exhibitors in the current event.
+
+```javascript
+client.getExhibitors().then(exhibitors => console.log(exhibitors))
+```
+
+## `client.getSessions()`
+
+Returns a Promise which resolves to the sessions in the current event.
+
+```javascript
+client.getSessions().then(sessions => console.log(sessions))
+```
+
+## `client.getSpeakers()`
+
+Returns a Promise which resolves to the speakers in the current event.
+
+```javascript
+client.getSpeakers().then(speakers => console.log(speakers))
+```
+
 ## `client.primaryColor`
 
 Primary color used in the event app, to match event branding.
@@ -88,7 +136,7 @@ useful tranformations available, e.g.
 new Color(client.primaryColor).shiftHue(1/2).limitLightness(0.8).rgbString()
 ```
 
-## `client.getToken`
+## `client.getToken()`
 
 Returns a Promise which resolves to a valid access token.  Normally used
 indirectly by other client libraries to access the DoubleDutch platform.

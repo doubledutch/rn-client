@@ -20,7 +20,7 @@
   "contributors": [
     "Adam Liechty <adam@doubledutch.me>"
   ],
-  "license": "ISC",
+  "license": "apache-2.0",
   "dependencies": {
     "@doubledutch/base-client": "^3.0.3",
     "react": "~16.0.0-alpha.12",

@@ -36,7 +36,7 @@ export default {
     LastName: 'Valjean',
     Title: 'Character',
     Company: 'Les Misérables',
-    Tier: 123,
+    TierId: 123,
     UserGroups: [68],
   },
   configuration: {

@@ -20,10 +20,10 @@ import {
 } from 'react-native'
 
 export class Avatar extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {}
-    this.s = null
+    this.s = createStyles(this.props)
   }
 
   getUser(props) {
@@ -34,16 +34,13 @@ export class Avatar extends Component {
     }
   }
 
-  componentWillMount() {
-    this.s = createStyles(this.props)    
-  }
-
   componentDidMount() {
     this.getUser(this.props)
   }
   componentWillReceiveProps(newProps) {
     this.s = createStyles(newProps)
     if (this.props.user !== newProps.user || this.props.client !== newProps.client) {
+      this.setState({user: null})
       this.getUser(newProps)
     }
   }

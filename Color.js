@@ -25,10 +25,10 @@ export default class Color {
       this._hsv = RGBtoHSV(defaultColor)
     } else if (typeof input === 'string') {
       this._hsv = RGBtoHSV(parseRGB(input))
-    } else if (input.h && input.s && input.v) {
+    } else if (input.h != null && input.s != null && input.v != null) {
       const {h,s,v} = input
       this._hsv = {h,s,v}
-    } else if (input.r && input.g && input.b) {
+    } else if (input.r != null && input.g != null && input.b != null) {
       this._hsv = RGBtoHSV(input)
     } else {
       this._hsv = RGBtoHSV(defaultColor)
@@ -42,8 +42,13 @@ export default class Color {
     return {h,s,v}
   }
 
-  shiftHue(hueShift) { return new Color({ ...this._hsv, h: this._hsv.h + hueShift }) }
-  limitLightness(maxLightness) { return new Color({ ...this._hsv, v: Math.min(this._hsv.v, maxLightness) }) }
+  shiftHue(hueShift) {
+    return new Color({ ...this._hsv, h: this._hsv.h + hueShift })
+  }
+
+  limitLightness(maxLightness) {
+    return new Color({ ...this._hsv, v: Math.min(this._hsv.v, maxLightness) })
+  }
 }
 
 function parseRGB(rgb) {

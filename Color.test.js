@@ -20,6 +20,10 @@ test('constructor parses #009acd', () => {
   expect(new Color('#009acd').rgbString()).toEqual('rgb(0,154,205)')
 })
 
+test('constructor parses #aaaaaa', () => {
+  expect(new Color('#aaaaaa').rgbString()).toEqual('rgb(170,170,170)')
+})
+
 test('shiftHue shifts #009acd by 1/3', () => {
   expect(new Color('#009acd').shiftHue(1/3).rgbString()).toEqual('rgb(205,0,154)')
 })
@@ -54,4 +58,8 @@ test('shiftHue shifts rgb(0,154,205) by 1/2', () => {
 
 test('limitLightness darkens rgb(0,255,102)', () => {
   expect(new Color('rgb(0,255,102)').limitLightness(0.75).rgbString()).toEqual('rgb(0,191,77)')
+})
+
+test('limitLightness leaves already-dark-enough #aaaaaa unchanged', () => {
+  expect(new Color('#aaaaaa').limitLightness(0.75).rgbString()).toEqual('rgb(170,170,170)')
 })

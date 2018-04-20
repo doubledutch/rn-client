@@ -72,6 +72,6 @@ test('limitSaturation dulls rgb(0,255,102)', () => {
   expect(new Color('rgb(0,255,102)').limitSaturation(0.75).rgbString()).toEqual('rgb(64,255,140)')
 })
 
-test('minSaturation brightens rgb(64,255,140)', () => {
+test('minSaturation saturates rgb(64,255,140)', () => {
   expect(new Color('rgb(64,255,140)').minSaturation(0.9).rgbString()).toEqual('rgb(25,255,117)')
 })

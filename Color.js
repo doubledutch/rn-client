@@ -49,6 +49,16 @@ export default class Color {
   limitLightness(maxLightness) {
     return new Color({ ...this._hsv, v: Math.min(this._hsv.v, maxLightness) })
   }
+  minLightness(minLightness) {
+    return new Color({ ...this._hsv, v: Math.max(this._hsv.v, minLightness) })
+  }
+
+  limitSaturation(maxSaturation) {
+    return new Color({ ...this._hsv, s: Math.min(this._hsv.s, maxSaturation) })    
+  }
+  minSaturation(minSaturation) {
+    return new Color({ ...this._hsv, s: Math.max(this._hsv.s, minSaturation) })    
+  }
 }
 
 function parseRGB(rgb) {

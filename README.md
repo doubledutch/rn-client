@@ -136,6 +136,18 @@ useful tranformations available, e.g.
 new Color(client.primaryColor).shiftHue(1/2).limitLightness(0.8).rgbString()
 ```
 
+`Color` functions include
+
+- `shiftHue(shiftAmount)` Shifts the color around the color wheel. A `shiftAmount` of 1/2
+  returns the color on the opposite side of the color wheel.
+- `limitLightness(maxLightness)`
+- `minLightness(minLightness)`
+- `limitSaturation(maxSaturation)`
+- `minSaturation(minSaturation)`
+- `rgb()` returns an object with `{r,g,b}` properties
+- `hsv()` returns an object with `{h,s,v}` properties
+- `rgbString()` returns a color string accepted by React Native styles
+
 ## `client.getToken()`
 
 Returns a Promise which resolves to a valid access token.  Normally used

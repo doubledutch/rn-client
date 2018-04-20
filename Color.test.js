@@ -60,6 +60,18 @@ test('limitLightness darkens rgb(0,255,102)', () => {
   expect(new Color('rgb(0,255,102)').limitLightness(0.75).rgbString()).toEqual('rgb(0,191,77)')
 })
 
+test('minLightness brightens rgb(0,191,77)', () => {
+  expect(new Color('rgb(0,191,77)').minLightness(0.9).rgbString()).toEqual('rgb(0,230,93)')
+})
+
 test('limitLightness leaves already-dark-enough #aaaaaa unchanged', () => {
   expect(new Color('#aaaaaa').limitLightness(0.75).rgbString()).toEqual('rgb(170,170,170)')
+})
+
+test('limitSaturation dulls rgb(0,255,102)', () => {
+  expect(new Color('rgb(0,255,102)').limitSaturation(0.75).rgbString()).toEqual('rgb(64,255,140)')
+})
+
+test('minSaturation brightens rgb(64,255,140)', () => {
+  expect(new Color('rgb(64,255,140)').minSaturation(0.9).rgbString()).toEqual('rgb(25,255,117)')
 })

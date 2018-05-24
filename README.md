@@ -68,20 +68,29 @@ Provides information about the current event.
 }
 ```
 
-## `client.getUser(id)`
+## `client.getAttendee(id)`
 
 Returns a Promise which resolves to the attendee in the current event.
 
 ```javascript
-client.getUser(42).then(attendee => console.log(attendee))
+client.getAttendee(42).then(attendee => console.log(attendee))
 ```
 
-## `client.getUsers()`
+## `client.getAttendees()`
 
 Returns a Promise which resolves to the attendees in the current event.
 
 ```javascript
-client.getUsers().then(attendees => console.log(attendees))
+client.getAttendees().then(attendees => console.log(attendees))
+```
+
+## `client.getLeaderboardAttendees(count)`
+
+Returns a Promise which resolves to the attendees in the current event with
+the hightest scores. `count` defaults to 20.
+
+```javascript
+client.getLeaderboardAttendees(10).then(attendees => console.log(attendees))
 ```
 
 ## `client.getCustomItems()`

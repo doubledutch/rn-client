@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export default {
+const shim = {
   isEmulated: true,
   openURL(url) { console.log('openURL: ' + url) },
   setTitle() {},
@@ -50,5 +50,19 @@ export default {
   apiRootURL: 'https://api.doubledutch.me/v2',
   requestAccessToken(callback) {
     callback(null, 'fake-access-token')
-  }
+  },
+  getCurrentUser(callback) {
+    callback(null, shim.currentUser)
+  },
+  getCurrentEvent(callback) {
+    callback(null, shim.currentEvent)
+  },
+  logOut() {
+    console.warn('Logout')
+  },
+  dismissLandingPage(isPermanent) {
+    console.warn('Dismiss landing page. isPermanent: ' + isPermanent)
+  },
 }
+
+export default shim

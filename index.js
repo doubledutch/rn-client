@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import RNFetchBlob from 'react-native-fetch-blob'
 import baseClient from '@doubledutch/base-client'
 export { TitleBar } from './TitleBar'
 export { Avatar } from './Avatar'
@@ -28,7 +29,7 @@ import emulatorShim from './emulatorShim'
 const DD = bindings || emulatorShim
 if (DD.isEmulated) setEmulated()
 
-const client = baseClient(DD)
+const client = baseClient(DD, postBase64File)
 setAdditionalColors(client)
 export default client
 
@@ -71,4 +72,10 @@ export function setOptions({ accessToken, apiRootURL, eventId, currentUser, prim
 function setAdditionalColors(client) {
   client.secondaryColor = new _Color(client.primaryColor).shiftHue(-1/3).limitLightness(0.8).rgbString()
   client.tertiaryColor = new _Color(client.primaryColor).shiftHue(1/3).limitLightness(0.8).rgbString()  
+}
+
+function postBase64File(url, headers, base64File) {
+  return RNFetchBlob.fetch('POST', url, {...headers, 'Content-Type' : 'application/multipart/form-data'}, [
+    { name : 'file', filename : 'file', data: base64File}
+  ])
 }

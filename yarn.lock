@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@doubledutch/base-client@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@doubledutch/base-client/-/base-client-3.2.0.tgz#38fdff0d7f12fd1b91b2c479aeab2b79be6b9c69"
+"@doubledutch/base-client@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@doubledutch/base-client/-/base-client-3.3.0.tgz#76e73b661e0a412f6bccaee52796d1cd8f4142ae"
 
 abab@^1.0.3:
   version "1.0.4"

@@ -57,6 +57,9 @@ const shim = {
   getCurrentEvent(callback) {
     callback(null, shim.currentEvent)
   },
+  getPrimaryColor(callback) {
+    callback(null, shim.primaryColor)
+  },
   logOut() {
     console.warn('Logout')
   },

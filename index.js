@@ -75,7 +75,5 @@ function setAdditionalColors(client) {
 }
 
 function postBase64File(url, headers, base64File) {
-  return RNFetchBlob.fetch('POST', url, {...headers, 'Content-Type' : 'application/multipart/form-data'}, [
-    { name : 'file', filename : 'file', data: base64File}
-  ])
+  return RNFetchBlob.fetch('POST', url, {...headers, 'Content-Type' : 'application/octet-stream'}, base64File)
 }

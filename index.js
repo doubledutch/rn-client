@@ -42,26 +42,34 @@ export default client
 // - apiRootURL   | These 3 options are all required to access a real event.
 // - eventId      |
 //
-// - currentUser    Modifications that should be applied to the currentUser.
-// - primaryColor   Set a new primary color in the emulator.
+// - currentUserMods    Modifications that should be applied to the currentUser.
+// - primaryColor       Set a new primary color in the emulator.
 //
-export function setOptions({ accessToken, apiRootURL, eventId, currentUser, primaryColor }) {
+export function setOptions({ accessToken, apiRootURL, eventId, currentUserMods, primaryColor }) {
   const newDD = Object.assign({}, DD)
 
   if (accessToken && apiRootURL && eventId) {
     newDD.isEmulated = false // We are shimming enough to make API requests work
     newDD.apiRootURL = apiRootURL
-    newDD.currentEvent.id = eventId
     newDD.requestAccessToken = function (callback) {
       callback(null, accessToken)
     }
   }
   
   const newClient = baseClient(newDD)
-  if (currentUser) newClient.currentUser = { ...newClient.currentUser, ...currentUser }
+
+  if (accessToken && apiRootURL && eventId) {
+    const getCurrentEvent = newClient.getCurrentEvent
+    newClient.getCurrentEvent = () => getCurrentEvent().then(event => ({...event, id: eventId}))
+  }
+
+  if (currentUserMods) {
+    const getCurrentUser = newClient.getCurrentEvent
+    newClient.currentUser = () => getCurrentUser().then(user => ({ ...user, ...currentUserMods }))
+  }
   
   if (primaryColor) {
-    newClient.primaryColor = primaryColor
+    newClient.getPrimaryColor = () => Promise.resolve(primaryColor)
     setAdditionalColors(newClient)
   }
   
@@ -70,8 +78,8 @@ export function setOptions({ accessToken, apiRootURL, eventId, currentUser, prim
 }
 
 function setAdditionalColors(client) {
-  client.secondaryColor = new _Color(client.primaryColor).shiftHue(-1/3).limitLightness(0.8).rgbString()
-  client.tertiaryColor = new _Color(client.primaryColor).shiftHue(1/3).limitLightness(0.8).rgbString()  
+  client.getSecondaryColor = client.getPrimaryColor().then(primaryColor => new _Color(primaryColor).shiftHue(-1/3).limitLightness(0.8).rgbString())
+  client.getTertiaryColor = client.getPrimaryColor().then(primaryColor => new _Color(primaryColor).shiftHue(1/3).limitLightness(0.8).rgbString())
 }
 
 function postBase64File(url, headers, base64File) {

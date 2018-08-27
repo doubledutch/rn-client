@@ -17,18 +17,25 @@ for an easy backend for your DoubleDutch extension.
 ```jsx
 import client, { TitleBar, Avatar } from '@doubledutch/rn-client'
 
-console.log(client.currentUser)
-console.log(client.currentEvent)
-console.log(client.primaryColor)
+client.getCurrentUser().then(user => console.log(user))
+client.getCurrentEvent().then(event => console.log(event))
+client.getPrimaryColor().then(color => console.log(color))
 
 client.getToken().then(token => console.log(`${token} is a valid DoubleDutch access token, usually used indirectly by other client libraries.`))
 
 class HomeView extends React.Component {
+  state = {}
+  componentDidMount() {
+    client.getCurrentUser().then(currentUser => this.setState({currentUser}))
+  }
+
   render() {
+    const {currentUser} = this.state
+    if (!currentUser) return <View />
     return (
       <View>
-        <TitleBar client={client} title={`Hello ${client.currentUser.firstName}`} />
-        <Avatar user={client.currentUser} size={40} />
+        <TitleBar client={client} title={`Hello ${currentUser.firstName}`} />
+        <Avatar user={currentUser} size={40} />
       </View>
     )
   }
@@ -37,9 +44,9 @@ class HomeView extends React.Component {
 
 # Documentation
 
-## `client.currentUser`
+## `client.getCurrentUser()`
 
-Provides information about the current attendee.
+Returns a Promise that resolves to information about the current attendee.
 
 ```javascript
 {
@@ -53,15 +60,15 @@ Provides information about the current attendee.
 }
 ```
 
-## `client.currentEvent`
+## `client.getCurrentEvent()`
 
-Provides information about the current event.
+Returns a Promise that resovles to information about the current event.
 
 ```javascript
 {
   startDate: '2017-01-01T00:00:00.000Z',  // First day of event
   endDate: '2017-01-02T00:00:00.000Z',    // Last day of event
-  id: 'sample-event-id',             // Event ID provided by DoubleDutch (required)
+  id: 'sample-event-id',                  // Event ID provided by DoubleDutch (required)
   description: 'Happy New Year',          // Description of the event (optional)
   name: 'New Year Kickoff',               // Name of the event (required)
   appId: 'sample-app-id'                  // ID of the parent app that contains this event
@@ -70,7 +77,7 @@ Provides information about the current event.
 
 ## `client.getAttendee(id)`
 
-Returns a Promise which resolves to the attendee in the current event.
+Returns a Promise that resolves to the attendee in the current event.
 
 ```javascript
 client.getAttendee(42).then(attendee => console.log(attendee))
@@ -78,7 +85,7 @@ client.getAttendee(42).then(attendee => console.log(attendee))
 
 ## `client.getAttendees()`
 
-Returns a Promise which resolves to the attendees in the current event.
+Returns a Promise that resolves to the attendees in the current event.
 
 ```javascript
 client.getAttendees().then(attendees => console.log(attendees))
@@ -86,7 +93,7 @@ client.getAttendees().then(attendees => console.log(attendees))
 
 ## `client.getLeaderboardAttendees(count)`
 
-Returns a Promise which resolves to the attendees in the current event with
+Returns a Promise that resolves to the attendees in the current event with
 the hightest scores. `count` defaults to 20.
 
 ```javascript
@@ -95,7 +102,7 @@ client.getLeaderboardAttendees(10).then(attendees => console.log(attendees))
 
 ## `client.getCustomItems()`
 
-Returns a Promise which resolves to the custom items in the current event.
+Returns a Promise that resolves to the custom items in the current event.
 
 ```javascript
 client.getCustomItems().then(items => console.log(items))
@@ -103,7 +110,7 @@ client.getCustomItems().then(items => console.log(items))
 
 ## `client.getExhibitors()`
 
-Returns a Promise which resolves to the exhibitors in the current event.
+Returns a Promise that resolves to the exhibitors in the current event.
 
 ```javascript
 client.getExhibitors().then(exhibitors => console.log(exhibitors))
@@ -111,7 +118,7 @@ client.getExhibitors().then(exhibitors => console.log(exhibitors))
 
 ## `client.getSessions()`
 
-Returns a Promise which resolves to the sessions in the current event.
+Returns a Promise that resolves to the sessions in the current event.
 
 ```javascript
 client.getSessions().then(sessions => console.log(sessions))
@@ -119,22 +126,22 @@ client.getSessions().then(sessions => console.log(sessions))
 
 ## `client.getSpeakers()`
 
-Returns a Promise which resolves to the speakers in the current event.
+Returns a Promise that resolves to the speakers in the current event.
 
 ```javascript
 client.getSpeakers().then(speakers => console.log(speakers))
 ```
 
-## `client.primaryColor`
+## `client.getPrimaryColor()`
 
-Primary color used in the event app, to match event branding.
+Returns a promise that resolves to the primary color used in the event app, to match event branding.
 
 ```javascript
 '#009acd'
 ```
 
-`client.secondaryColor` and `client.tertiaryColor` are also automatically
-generated based on this `primaryColor`, designed to be pleasing complements when
+`client.getSecondaryColor()` and `client.getTertiaryColor()` are also automatically
+generated based on the primary color, designed to be pleasing complements when
 other branded colors are desired.
 
 ### `Color`
@@ -142,7 +149,7 @@ If additional branded colors are desired, a `Color` class is exported with some
 useful tranformations available, e.g.
 
 ```javascript
-new Color(client.primaryColor).shiftHue(1/2).limitLightness(0.8).rgbString()
+new Color(primaryColor).shiftHue(1/2).limitLightness(0.8).rgbString()
 ```
 
 `Color` functions include
@@ -204,6 +211,7 @@ his/her initials if no image is available.
 ### Props
 
 - `user`. The attendee whose avatar should be displayed. This can be
-  `client.currentUser` to display the avatar of the attendee currently viewing
-  the app, or another attendee object.
+  the current attendee resolved from the `client.getCurrentUser()` Promise,
+  to display the avatar of the attendee currently viewing the app, or another
+  attendee object.
 - `size`. The diameter of the avatar image.

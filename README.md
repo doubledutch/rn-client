@@ -31,10 +31,9 @@ class HomeView extends React.Component {
 
   render() {
     const {currentUser} = this.state
-    if (!currentUser) return <View />
     return (
       <View>
-        <TitleBar client={client} title={`Hello ${currentUser.firstName}`} />
+        <TitleBar client={client} title={`Hello ${currentUser ? currentUser.firstName : ''}`} />
         <Avatar user={currentUser} size={40} />
       </View>
     )

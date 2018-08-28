@@ -37,8 +37,8 @@ export class TitleBar extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.title !== this.props.title) this.setTitle(newProps.title)
+  componentDidUpdate(prevProps) {
+    if (prevProps.title !== this.props.title) this.setTitle(this.props.title)
   }
 
   componentWillMount() {

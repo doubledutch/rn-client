@@ -15,7 +15,7 @@
  */
 
 import React, { Component } from 'react'
-import ReactNative, { Platform, Text, View } from 'react-native'
+import { Platform, StyleSheet, Text, View } from 'react-native'
 import Color from './Color'
 
 const topSpaceHeight = 21
@@ -99,7 +99,7 @@ export class TitleBar extends Component {
   }
 }
 
-const s = ReactNative.StyleSheet.create({
+const s = StyleSheet.create({
   wholeBarEmulator: {
     backgroundColor: new Color().rgbString(),
     opacity: 0.9,

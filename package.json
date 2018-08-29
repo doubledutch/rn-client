@@ -1,6 +1,6 @@
 {
   "name": "@doubledutch/rn-client",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -30,12 +30,17 @@
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
-    "jest": "^21.2.1"
+    "jest": "^23.5.0"
   },
   "jest": {
     "preset": "react-native",
+    "globals": {
+      "self": {},
+      "window": {},
+      "global": {}
+    },
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|@doubledutch/base-client)/)"
+      "node_modules/(?!(react-native|@doubledutch/base-client|react-native-fetch-blob)/)"
     ]
   }
 }

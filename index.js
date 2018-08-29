@@ -16,6 +16,8 @@
 
 import RNFetchBlob from 'react-native-fetch-blob'
 import baseClient from '@doubledutch/base-client'
+export { locale } from './locale'
+export { default as translate, setLocale, useStrings } from './translate'
 export { TitleBar } from './TitleBar'
 export { Avatar } from './Avatar'
 export { JavascriptSdkWebView } from './JavascriptSdkWebView'

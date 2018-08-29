@@ -1,6 +1,6 @@
 {
   "name": "@doubledutch/rn-client",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -34,8 +34,13 @@
   },
   "jest": {
     "preset": "react-native",
+    "globals": {
+      "self": {},
+      "window": {},
+      "global": {}
+    },
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|@doubledutch/base-client)/)"
+      "node_modules/(?!(react-native|@doubledutch/base-client|react-native-fetch-blob)/)"
     ]
   }
 }

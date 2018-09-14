@@ -25,10 +25,6 @@ let isEmulated
 export function setEmulated() { isEmulated = true }
 
 export class TitleBar extends Component {
-  constructor() {
-    super()
-  }
-
   setTitle(title) {
     if (this.props.client) { // This only works if `client` is specified.
       const fullTitle = title + this.statusLightText()
@@ -42,7 +38,7 @@ export class TitleBar extends Component {
   }
 
   componentWillMount() {
-    const { signin, client, title } = this.props
+    const { signin, title } = this.props
 
     this.state = {
       isSignedIn: false,

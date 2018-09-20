@@ -53,11 +53,14 @@ export function setOptions({ accessToken, apiRootURL, eventId, currentUserMods, 
   if (accessToken && apiRootURL && eventId) {
     newDD.isEmulated = false // We are shimming enough to make API requests work
     newDD.apiRootURL = apiRootURL
+  }
+
+  if (accessToken) {
     newDD.requestAccessToken = function (callback) {
       callback(null, accessToken)
     }
   }
-  
+
   const newClient = baseClient(newDD)
 
   if (accessToken && apiRootURL && eventId) {

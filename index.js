@@ -66,8 +66,8 @@ export function setOptions({ accessToken, apiRootURL, eventId, currentUserMods, 
   }
 
   if (currentUserMods) {
-    const getCurrentUser = newClient.getCurrentEvent
-    newClient.currentUser = () => getCurrentUser().then(user => ({ ...user, ...currentUserMods }))
+    const getCurrentUser = newClient.getCurrentUser
+    newClient.getCurrentUser = () => getCurrentUser().then(user => ({ ...user, ...currentUserMods }))
   }
   
   if (primaryColor) {

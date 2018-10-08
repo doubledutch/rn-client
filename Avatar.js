@@ -28,7 +28,7 @@ export class Avatar extends Component {
 
   getUser() {
     if (this.props.user && this.props.user.id && !this.props.user.image && this.props.client) {
-      this.props.client.getAttendee(props.user.id)
+      this.props.client.getAttendee(this.props.user.id)
         .then(user => this.setState({user}))
         .catch(err => console.log(err))
     }
@@ -63,8 +63,9 @@ export class Avatar extends Component {
   }
 }
 
-function createStyles({size}) {
+function createStyles({size, roundedness}) {
   const diameter = size || 25
+  const borderRadius = diameter / 2 * (roundedness || 1)
 
   return StyleSheet.create({
     defaultOuterStyle: {
@@ -72,22 +73,22 @@ function createStyles({size}) {
     noface: {
       width: diameter,
       height: diameter,
-      borderRadius: diameter / 2,      
+      borderRadius,      
       backgroundColor: 'gray',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
     },
     nofaceText: {
       color: 'white',
       textAlign: 'center',
       backgroundColor: 'transparent',
-      fontSize: diameter * 0.55
+      fontSize: diameter * 0.55,
     },
     image: {
       position: 'absolute',
       width: diameter,
       height: diameter,
-      borderRadius: diameter / 2
-    }
+      borderRadius,
+    },
   })
 }

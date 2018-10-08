@@ -204,7 +204,7 @@ React Native component that shows a circular avatar image of an attendee, or
 his/her initials if no image is available.
 
 ```jsx
-<Avatar user={user} size={25} client={client} />
+<Avatar user={user} size={25} client={client} roundedness={1.0} />
 ```
 
 ### Props
@@ -214,3 +214,5 @@ his/her initials if no image is available.
   to display the avatar of the attendee currently viewing the app, or another
   attendee object.
 - `size`. The diameter of the avatar image.
+- `client`. The rn-client object used to look up not-yet-known images in the background.
+- `roundedness` a number between 0 (square) and 1.0 (circle)

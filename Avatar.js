@@ -46,17 +46,18 @@ export class Avatar extends Component {
   }
 
   render() {
-    const { style } = this.props
+    const { style, backgroundColor } = this.props
     const user = this.state.user || this.props.user
     const s = this.s
 
     if (!user) return null
+    const noFaceStyle = backgroundColor ? {backgroundColor} : null
 
     return (
       <View style={style || s.defaultOuterStyle}>
-        <View style={s.noface}>
-          <Text style={this.s.nofaceText}>{user.firstName ? user.firstName.substring(0,1) : ''}{user.lastName ? user.lastName.substring(0,1) : ''}</Text>
-          { user.image ? <Image source={{uri: user.image}} style={this.s.image}></Image> : null }
+        <View style={[s.noFace, noFaceStyle]}>
+          <Text style={this.s.noFaceText}>{user.firstName ? user.firstName.substring(0,1) : ''}{user.lastName ? user.lastName.substring(0,1) : ''}</Text>
+          { user.image ? <Image source={{uri: user.image}} style={this.s.image} /> : null }
         </View>
       </View>
     )
@@ -70,7 +71,7 @@ function createStyles({size, roundedness}) {
   return StyleSheet.create({
     defaultOuterStyle: {
     },
-    noface: {
+    noFace: {
       width: diameter,
       height: diameter,
       borderRadius,      
@@ -78,7 +79,7 @@ function createStyles({size, roundedness}) {
       alignItems: 'center',
       justifyContent: 'center',
     },
-    nofaceText: {
+    noFaceText: {
       color: 'white',
       textAlign: 'center',
       backgroundColor: 'transparent',

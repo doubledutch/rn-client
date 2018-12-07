@@ -78,12 +78,15 @@ export class TitleBar extends Component {
     const { client } = this.props
     
     // This adjustment can be removed entirely when 8.2 has been out for one year (approx January 2020)
-    const adjustForIOSNavBar = isEmulated || !client || !(client.clientVersion.major > 8 || (client.clientVersion.major === 8 && client.clientVersion.minor >= 2))
+    const adjustForNavBar = isEmulated || Platform.select({
+      ios: !client || !(client.clientVersion.major > 8 || (client.clientVersion.major === 8 && client.clientVersion.minor >= 2)),
+      android: false,
+    }) 
 
     return (
       <View style={isEmulated ? [s.wholeBarEmulator, this.props.style] : s.wholeBar}>
-        { adjustForIOSNavBar && <View style={s.topSpace} /> }
-        <View style={[s.titleContainer, adjustForIOSNavBar ? s.titleSpace : null]}>
+        { adjustForNavBar && <View style={s.topSpace} /> }
+        <View style={[s.titleContainer, adjustForNavBar ? s.titleSpace : null]}>
           { isEmulated && <Text style={s.emulatorTitle}>{title}</Text> }
         </View>
       </View>
@@ -96,9 +99,9 @@ export class TitleBar extends Component {
       if (isSignedIn) return '  🔵'
       if (didSigninFail) return '  🔴'
       return '  ⚫'
-    } else {
-      return ''
-    }
+    } 
+    
+    return ''
   }
 }
 
@@ -116,7 +119,7 @@ const s = StyleSheet.create({
     height: Platform.select({ios: topSpaceHeight, android: 0}),
   },
   titleSpace: {
-    height: Platform.select({ios: barHeight, android: 0}),
+    height: barHeight,
   },
   titleContainer: {
     justifyContent: 'center',

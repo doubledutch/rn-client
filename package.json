@@ -1,6 +1,6 @@
 {
   "name": "@doubledutch/rn-client",
-  "version": "5.0.1-alpha",
+  "version": "5.0.2-alpha",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,6 @@
   },
   "keywords": [
     "doubledutch",
-    "bazaar",
     "mobile",
     "client"
   ],
@@ -22,7 +21,7 @@
   ],
   "license": "apache-2.0",
   "dependencies": {
-    "@doubledutch/base-client": "^4.2.0",
+    "@doubledutch/base-client": "^4.2.1",
     "react": "16.6.1",
     "react-native": "0.57.5",
     "rn-fetch-blob": "0.10.13"

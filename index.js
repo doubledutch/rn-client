@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import RNFetchBlob from 'react-native-fetch-blob'
+import RNFetchBlob from 'rn-fetch-blob'
 import baseClient from '@doubledutch/base-client'
 export { locale } from './locale'
 export { default as translate, setLocale, useStrings } from './translate'

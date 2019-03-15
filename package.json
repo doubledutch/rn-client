@@ -1,6 +1,6 @@
 {
   "name": "@doubledutch/rn-client",
-  "version": "5.0.2-alpha",
+  "version": "5.0.4-alpha",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,13 +22,13 @@
   "license": "apache-2.0",
   "dependencies": {
     "@doubledutch/base-client": "^4.2.1",
-    "react": "16.6.1",
-    "react-native": "0.57.5",
-    "rn-fetch-blob": "0.10.13"
+    "rn-fetch-blob": "0.10.15"
   },
   "devDependencies": {
-    "jest": "^23.5.0",
-    "metro-react-native-babel-preset": "0.50.0"
+    "jest": "^24.5.0",
+    "metro-react-native-babel-preset": "^0.53.1",
+    "react": "16.8.3",
+    "react-native": "0.59.1"
   },
   "jest": {
     "preset": "react-native",

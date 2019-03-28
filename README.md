@@ -52,6 +52,7 @@ Returns a Promise that resolves to information about the current attendee.
   id: '24601',                          // DoubleDutch user ID (required)
   image: 'https://ddut.ch/image.jpg',   // Avatar image URL (optional)
   identifier: 'jvj24601',               // Unique ID provided by event organizer (required)
+  email: 'jean@valjean.com',
   firstName: 'Jean',                    // Given name (required)
   lastName: 'Valjean',                  // Surname (required)
   title: 'Character',                   // Job title (optional)

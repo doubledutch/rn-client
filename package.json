@@ -1,6 +1,6 @@
 {
   "name": "@doubledutch/rn-client",
-  "version": "5.0.4-alpha",
+  "version": "5.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {

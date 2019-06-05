@@ -1,6 +1,6 @@
 {
   "name": "@doubledutch/rn-client",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -19,16 +19,16 @@
   "contributors": [
     "Adam Liechty <adam@doubledutch.me>"
   ],
-  "license": "apache-2.0",
+  "license": "Apache-2.0",
   "dependencies": {
-    "@doubledutch/base-client": "^4.2.1",
+    "@doubledutch/base-client": "^4.2.3",
     "rn-fetch-blob": "0.10.15"
   },
   "devDependencies": {
-    "jest": "^24.5.0",
-    "metro-react-native-babel-preset": "^0.53.1",
+    "jest": "^24.8.0",
+    "metro-react-native-babel-preset": "^0.54.1",
     "react": "16.8.3",
-    "react-native": "0.59.1"
+    "react-native": "0.59.4"
   },
   "jest": {
     "preset": "react-native",
@@ -37,8 +37,11 @@
       "window": {},
       "global": {}
     },
+    "transform": {
+      "^.+\\.js$": "react-native/jest/preprocessor.js"
+    },
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|@doubledutch/base-client|react-native-fetch-blob)/)"
+      "node_modules/(?!(react-native|@doubledutch/base-client|rn-fetch-blob)/)"
     ]
   }
 }
